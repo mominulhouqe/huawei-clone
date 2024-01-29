@@ -25,40 +25,14 @@
       <!-- Logo -->
       <a href="/" class="text-lg font-bold">Logo</a>
 
-      <!-- Mobile Menu Toggle -->
-      <button
-        class="flex md:hidden flex-col items-center align-middle"
-        @click="openMenu = !openMenu"
-        :aria-expanded="openMenu"
-        aria-controls="mobile-navigation"
-        aria-label="Navigation Menu"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
-        <span class="text-xs">Menu</span>
-      </button>
-
       <!-- Main Navigations -->
 
       <ul
-        class="flex transition-all duration-700"
+        class="md:flex hidden items-center transition-all duration-700"
         x-show="!isSearchOpen"
+        x-on:keydown.escape.window="isSearchOpen = false"
         x-transition:enter.duration.500ms
         x-transition:leave.duration.400ms
-      
-       
       >
         <!-- Navigation items -->
         <li>
@@ -86,7 +60,7 @@
         </li>
       </ul>
 
-      <div class="flex gap-2 items-center">
+      <div class="md:flex gap-2 items-center hidden">
         <!-- Search input -->
         <div
           x-show="isSearchOpen"
@@ -94,8 +68,6 @@
           x-transition:enter.duration.700ms
           x-transition:leave.duration.600ms
           x-transition.scale.origin.left
-          
-  
         >
           <input type="search" class="bg-black text-white p-2" />
         </div>
@@ -104,12 +76,46 @@
         <button>
           <a
             href="#"
-            @click="isSearchOpen = !isSearchOpen"
+            @click="isSearchOpen = true"
+            :class="!isSearchOpen ? '':'hidden'"
             class="block p-2 border"
             >Search</a
           >
         </button>
+        <button>
+          <a
+            href="#"
+            :class="isSearchOpen ? '':'hidden'"
+            @click="isSearchOpen = false"
+            class="block p-2 border"
+            >cross</a
+          >
+        </button>
       </div>
+      <!-- Mobile Menu Toggle -->
+      <button
+        class="flex md:hidden flex-col items-center align-middle"
+        @click="openMenu = !openMenu"
+        :aria-expanded="openMenu"
+        aria-controls="mobile-navigation"
+        aria-label="Navigation Menu"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+        <span class="text-xs">Menu</span>
+      </button>
     </header>
 
     <!-- Pop Out Navigation -->
